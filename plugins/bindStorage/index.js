@@ -32,7 +32,7 @@ export default async (ctx, options = {}) => {
     delete currentLSJsonNoTimestamp?.___last_updated
     if (data === JSON.stringify(currentLSJsonNoTimestamp)) return
     const currentLS = JSON.parse(crypto.decrypt(currentLSJson))
-    if (!!!currentLS?.___last_updated || currentLS?.___last_updated > time) return
+    if (!!currentLS?.___last_updated && currentLS?.___last_updated > time) return
     storageFunction[type].set(storeNames[type][i], crypto.encrypt(dataWithUpdatedTimestamp))
   }
 
